@@ -1,9 +1,10 @@
-function Card({ index, color, title, icon, shade, amount = 10 }) {
+function Card({ index, color, title, icon, shade, amount = 10, onClick = ()=>{} }) {
   return (
     <div
       key={index}
       className="flex items-center pl-3 pr-5 rounded-2xl h-[4.5rem]"
       style={{ backgroundColor: color }}
+      onClick={onClick}
     >
       <div className={`rounded-full p-2`} style={{ backgroundColor: shade }}>
         {icon}

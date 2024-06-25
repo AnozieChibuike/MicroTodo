@@ -3,8 +3,7 @@ import Input from "./input";
 import { useNavigate } from "react-router-dom";
 import Alert from "@mui/material/Alert";
 import { useLocation } from "react-router-dom";
-
-const AUTH_URL = "http://localhost:5000";
+import AUTH_URL from "../constants/localUrl";
 
 function Auth({ title, subTitle, type, bottomText, next, onPress = () => {} }) {
   const navigate = useNavigate();
@@ -21,6 +20,7 @@ function Auth({ title, subTitle, type, bottomText, next, onPress = () => {} }) {
     api: null,
   });
   useEffect(() => {
+    if (localStorage.getItem("id")) navigate("/dashboard");
     setError((prevState) => ({ ...prevState, api: null }));
   }, [this]);
   useEffect(() => {

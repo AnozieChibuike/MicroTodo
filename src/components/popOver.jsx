@@ -20,7 +20,7 @@ export default function BasicPopover({
       }}
     >
       <div className="py-5 pr-10 px-2">
-        <Link to="/login" className="text-start">Logout</Link>
+        <Link onClick={()=>localStorage.removeItem("id")} to="/login" className="text-start">Logout</Link>
       </div>
     </Popover>
   );

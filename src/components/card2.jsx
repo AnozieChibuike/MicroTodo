@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CompletedIcon from "./icons/completed";
 
-function Card2({ task, completed, tags }) {
+function Card2({ task, completed, tags, onTicked = () => {}, onClick = () => {} }) {
   const [check, set] = useState(completed);
   const ticked = {
     icon: <CompletedIcon color="white" size={25} />,
@@ -9,10 +9,8 @@ function Card2({ task, completed, tags }) {
     shade: check ? "#31b59f" : "grey",
   };
   return (
-    <div
-      className="flex my-4 flex-row justify-between items-center bg-white rounded-2xl border-[1px] border-black shadow-[0_6px_0px_-3px] w-full h-24 px-2 cursor-pointer"
-    >
-      <div className="flex flex-col">
+    <div className="flex my-4 flex-row justify-between items-center bg-white rounded-2xl border-[1px] border-black shadow-[0_6px_0px_-3px] w-full h-24 px-2 cursor-pointer">
+      <div className="flex flex-col flex-1" onClick={onClick}>
         <p className="mb-2">{task}</p>
         <div className="flex gap-1">
           {tags.map((items, idx) => (
@@ -26,7 +24,10 @@ function Card2({ task, completed, tags }) {
             check == false ? "shadow-[inset_1px_3px_7px_-3px]" : ""
           }`}
           style={{ backgroundColor: ticked.shade }}
-          onClick={() => set(!check)}
+          onClick={() => {
+            onTicked();
+            set(!check);
+          }}
         >
           {check ? ticked.icon : ""}
         </div>
@@ -35,15 +36,17 @@ function Card2({ task, completed, tags }) {
   );
 }
 
-function TagCard({ tag, color }) {
+export function TagCard({ tag, color, onClick = () => {} }) {
   return (
     <div
-      className="text-white px-2 rounded-md"
+      className="text-white flex justify-center px-2 items-center rounded-md"
       style={{ backgroundColor: color }}
+      onClick={onClick}
     >
       <p>{tag}</p>
     </div>
   );
 }
+
 
 export default Card2;
